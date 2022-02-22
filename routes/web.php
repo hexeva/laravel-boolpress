@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::middleware('auth')
-->namespace('admin')
+->namespace('Admin')
 ->name('admin.')
 ->prefix('admin')
 ->group(function(){
