@@ -31,7 +31,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -42,7 +42,9 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $form_data = $request->all();
+        $request->validate($this->getValidate());
+        
     }
 
     /**
@@ -93,4 +95,13 @@ class PostController extends Controller
     {
         //
     }
+    // funzione per la validazione dati 
+    protected function getValidate(){
+        return [
+            'title'=>'required|max:255',
+            'content'=>'required|max:60000'
+        ];
+    }
 }
+
+
