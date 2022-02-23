@@ -97,11 +97,11 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $form_data = $request->all();
-        $request->validate($this->getValidationRules());
+        $request->validate($this->getValidate());
 
         $post = Post::findOrFail($id);
         
-        
+        // FAccio una modifica dello slug solo se l'utente modifica effettivamente il titolo
         if($form_data['title'] != $post->title) {
             $form_data['slug'] = $this->getUniqueSlugFromTitle($form_data['title']);
         }
@@ -119,8 +119,12 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::FindOrFail($id);
+        $post->delete();
+        return redirect()->route('admin.posts.index');
     }
+
+
     // funzione per la validazione dati 
     protected function getValidate(){
         return [
