@@ -26,9 +26,9 @@
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Category</label>
                     <select class="form-select" id="category_id" name="category_id">
-                        <option value="" selected>Nessuna</option>
+                        <option value="" >Nessuna</option>
                         @foreach($categories as $category)
-                            <option value="1">{{$category->name}}</option>
+                            <option selected value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
                         @endforeach
                       </select>
                   </div>

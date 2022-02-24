@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Exists;
 
 class PostController extends Controller
 {
@@ -32,7 +33,7 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
         $categories = Category::all();
         $data =[
             'categories' => $categories
@@ -83,10 +84,12 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $categories = Category::all();
         $post = Post::findOrFail($id);
 
         $data=[
-            'post'=>$post
+            'post'=>$post,
+            'categories'=>$categories
         ];
 
 
@@ -135,7 +138,9 @@ class PostController extends Controller
     protected function getValidate(){
         return [
             'title'=>'required|max:255',
-            'content'=>'required|max:60000'
+            'content'=>'required|max:60000',
+            // validazione per relazione tra category e posts con exists specifico che category_id esiste dentro category e corrisponde all'id
+            'category_id'=>'exists:categories,id|nullable'
         ];
     }
 
