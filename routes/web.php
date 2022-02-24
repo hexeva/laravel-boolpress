@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,6 +26,9 @@ Route::middleware('auth')
 ->group(function(){
     Route::get('/','HomeController@index')->name('home');
     Route::resource('posts','PostController');
+    // rotte per Categories
+    Route::get('/categories','CategoryController@index')->name('categories');
+    Route::get('/categories/{slug}','CategoryController@show')->name('category_info');
 
 });
 
