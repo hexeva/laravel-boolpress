@@ -26,25 +26,25 @@
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Category</label>
                     <select class="form-select" id="category_id" name="category_id">
-                        <option value="" >Nessuna</option>
+                        <option value="">Nessuna</option>
                         @foreach($categories as $category)
                             <option selected value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
                         @endforeach
                       </select>
                   </div>
                   <div class="mb-3">
-                      <h2>Tags:</h2>
-                      @foreach ($tags as $tag)
-                          {{-- checkbox --}}
+                        <h3>Tag:</h3>
+                        @foreach ($tags as $tag)
+                        {{-- Checkbox --}}
                             <div class="form-check">
-                                <input class="form-check-input" name="tags[]" type="checkbox" value="{{ $tag->id }}" id="tag-{{ $tag->id }}">
+                                <input {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }} class="form-check-input" name="tags[]" type="checkbox" value="{{ $tag->id }}" id="tag-{{ $tag->id }}">
                                 <label class="form-check-label" for="tag-{{ $tag->id }}">
-                                {{$tag->name}}
+                                    {{ $tag->name }}
                                 </label>
                             </div>
-                            {{-- end checkbox --}}
-                      @endforeach
-                  </div>
+                            {{-- checkbox --}}
+                        @endforeach
+                    </div>
                 <div class="mb-3">
                     <label for="content" class="form-label">Title</label>
                     <textarea class="form-control" name="content" id="content" cols="30" rows="10">{{old('content')}}</textarea>
