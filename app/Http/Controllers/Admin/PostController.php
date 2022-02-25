@@ -36,8 +36,10 @@ class PostController extends Controller
     public function create()
     {   
         $categories = Category::all();
+        $tags = Tag::all();
         $data =[
-            'categories' => $categories
+            'categories' => $categories,
+            'tags' => $tags
         ];
         return view('admin.posts.create',$data);
     }
@@ -57,6 +59,8 @@ class PostController extends Controller
         $new_post->fill($form_data);
         $new_post->slug = $this->getUniqueSlugFromTitle($form_data['title']);
         $new_post->save();
+        // creo il record della tabella ponte per relazione tra post e tags
+        $new_post->tags()->sync($form_data['tags']);
 
         return redirect()->route('admin.posts.show',['post'=>$new_post->id]);
     }
@@ -70,7 +74,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-     
+        // dd($post->tags);
         $data = [
             'post'=>$post
         ];

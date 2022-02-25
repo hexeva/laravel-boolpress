@@ -32,6 +32,19 @@
                         @endforeach
                       </select>
                   </div>
+                  <div class="mb-3">
+                      <h2>Tags:</h2>
+                      @foreach ($tags as $tag)
+                          {{-- checkbox --}}
+                  <div class="form-check">
+                    <input class="form-check-input" name="tags[]" type="checkbox" value="{{ $tag->id }}" id="tag-{{ $tag->id }}">
+                    <label class="form-check-label" for="tag-{{ $tag->id }}">
+                      {{$tag->name}}
+                    </label>
+                  </div>
+                  {{-- end checkbox --}}
+                      @endforeach
+                  </div>
                 <div class="mb-3">
                     <label for="content" class="form-label">Title</label>
                     <textarea class="form-control" name="content" id="content" cols="30" rows="10">{{old('content')}}</textarea>

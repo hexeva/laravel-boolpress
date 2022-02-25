@@ -13,12 +13,11 @@
     </div> 
 
     <div class="my-3">
-        @forelse ($post->tags as $tag)
-        <h3>Tags: {{ $tag->name }}</h3>
-            
-        @empty
-            Nessun tag
-        @endforelse
+       @forelse ($post->tags as $tag)
+           <h3>Tags: {{$tag->name}}  {{ $loop->last ? '' : ', ' }}</h3>     
+       @empty
+           <h3>Nessun Tag</h3>
+       @endforelse
     </div> 
 
     <p>{{$post->content}}</p>
