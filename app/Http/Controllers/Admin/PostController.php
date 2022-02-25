@@ -60,6 +60,7 @@ class PostController extends Controller
         $new_post->slug = $this->getUniqueSlugFromTitle($form_data['title']);
         $new_post->save();
         // creo il record della tabella ponte per relazione tra post e tags
+        
         $new_post->tags()->sync($form_data['tags']);
 
         return redirect()->route('admin.posts.show',['post'=>$new_post->id]);
