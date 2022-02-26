@@ -62,7 +62,6 @@ class PostController extends Controller
         // creo il record della tabella ponte per relazione tra post e tags e verifico che effettivamente form_data['tags] esista
         if(array_key_exists("tags",$form_data)){
         $new_post->tags()->sync($form_data['tags']);
-
         }
         
 
@@ -149,7 +148,9 @@ class PostController extends Controller
             'title'=>'required|max:255',
             'content'=>'required|max:60000',
             // validazione per relazione tra category e posts con exists specifico che category_id esiste dentro category e corrisponde all'id
-            'category_id'=>'exists:categories,id|nullable'
+            'category_id'=>'exists:categories,id|nullable',
+            // valido anche tags 
+            'tags'=>'exists:tags,id'
         ];
     }
 
