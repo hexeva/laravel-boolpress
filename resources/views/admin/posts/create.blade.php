@@ -1,17 +1,5 @@
 @extends('layouts.dashboard')
 
-{{-- MESSAGE ERROR --}}
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
-{{-- END MESSAGE ERROR --}}
-
 @section('content')
     <section>
         <h1 class="text-center">CREATE A NEW POST</h1>
@@ -23,7 +11,11 @@
                   <label for="title" class="form-label">Title</label>
                   <input type="" class="form-control" id="title" name="title" value="{{old('title')}}" >
                 </div>
-                
+                {{-- error --}}
+                @error('title')
+                    <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+                {{-- end error --}}
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Category</label>
                     <select class="form-select" id="category_id" name="category_id">
@@ -33,6 +25,12 @@
                         @endforeach
                       </select>
                   </div>
+
+                    {{-- error --}}
+                    @error('category_id')
+                        <div class="alert alert-danger">{{$message}}</div>
+                    @enderror
+                    {{-- end error --}}
 
                   <div class="mb-3">
                         <h3>Tag:</h3>
@@ -44,14 +42,20 @@
                                     {{ $tag->name }}
                                 </label>
                             </div>
-                            {{-- checkbox --}}
+                        {{-- checkbox --}}
                         @endforeach
                     </div>
 
                 <div class="mb-3">
-                    <label for="content" class="form-label">Title</label>
+                    <label for="content" class="form-label">Content</label>
                     <textarea class="form-control" name="content" id="content" cols="30" rows="10">{{old('content')}}</textarea>
-                  </div>
+                </div>
+
+                    {{-- error --}}
+                    @error('content')
+                        <div class="alert alert-danger">{{$message}}</div>
+                    @enderror
+                    {{-- end error --}}
                 
                 
                 <button type="submit" class="btn btn-primary">Submit</button>

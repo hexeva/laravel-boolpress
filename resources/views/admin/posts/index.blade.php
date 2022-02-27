@@ -3,7 +3,7 @@
 @section('content')
 <h1 class="text-center">Post lists</h1>
    <div class="row row-cols-3">
-       @foreach ($post as $post)
+       @foreach ($posts as $post)
            {{-- single post --}}
        <div class="col">
             <div class="card my-3">
@@ -17,6 +17,8 @@
         </div>
             {{-- end single post --}}
        @endforeach
-     
    </div>
+
+   {{ $posts->links() }}
+   
 @endsection

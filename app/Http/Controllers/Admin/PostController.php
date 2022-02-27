@@ -19,10 +19,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(9);
 
         $data = [
-            'post'=>$posts
+            'posts'=>$posts
         ];
 
         return view('admin.posts.index',$data);
