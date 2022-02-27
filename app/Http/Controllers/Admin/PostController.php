@@ -148,6 +148,8 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::FindOrFail($id);
+        // prima di cancellare devo eliminare tutte le relazioni tra tabelle
+        $post->tags()->sync([]);
         $post->delete();
         return redirect()->route('admin.posts.index');
     }
