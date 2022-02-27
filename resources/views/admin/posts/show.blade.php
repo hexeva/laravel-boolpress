@@ -4,21 +4,21 @@
 
 <section>
     <h2>{{$post->title}}</h2>
-    <div class="my-3">Slug:
-        <h5>{{$post->slug}}</h3>
+    <div class="my-3">
+        <strong>Slug:</strong> {{$post->slug}}
     </div>
     {{-- verifico se la relazione con la categoria non è NUll faccio vedere la category altrimenti torno un messaggio 'nessuna categoria' --}}
     <div class="my-3">
         <h3>Category: {{$post->category ? $post->category->name : 'nessuna categoria'}}</h3>
     </div> 
 
-    <div class="my-3">
-       @forelse ($post->tags as $tag)
-           <h3>Tags: {{$tag->name}}  {{ $loop->last ? '' : ', ' }}</h3>     
-       @empty
-           <h3>Nessun Tag</h3>
-       @endforelse
-    </div> 
+    <div class="my-3"><strong>Tags:</strong>
+        @forelse ($post->tags as $tag)
+            {{ $tag->name }}{{ $loop->last ? '' : ', ' }}
+        @empty
+            Nessun Tag
+        @endforelse
+    </div>
 
     <p>{{$post->content}}</p>
     <a href="{{route('admin.posts.edit',['post'=>$post->id])}}" class="btn btn-primary">Edit Post</a>

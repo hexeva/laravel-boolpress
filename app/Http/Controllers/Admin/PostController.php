@@ -94,10 +94,12 @@ class PostController extends Controller
     {
         $categories = Category::all();
         $post = Post::findOrFail($id);
+        $tags = Tag::all();
 
         $data=[
             'post'=>$post,
-            'categories'=>$categories
+            'categories'=>$categories,
+            'tags'=>$tags
         ];
 
 
@@ -124,6 +126,15 @@ class PostController extends Controller
         }
         
         $post->update($form_data);
+        // sincronizzo la collection post->tags con i dati passati dal form. In questo caso i tags
+        
+        // se esiste la chiave tags di form data allora:
+            if(isset($form_data['tags'])){
+                $post->tags()->sync($form_data['tags']);
+                // altrimenti se l'utente non seleziona alcun tag, la chiave tags sarà null e  sincronizzo un array vuoto
+            }else{
+                $post->tags()->sync([]);
+            }
 
         return redirect()->route('admin.posts.show', ['post' => $post->id]);
     }

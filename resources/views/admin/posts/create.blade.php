@@ -23,6 +23,7 @@
                   <label for="title" class="form-label">Title</label>
                   <input type="" class="form-control" id="title" name="title" value="{{old('title')}}" >
                 </div>
+                
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Category</label>
                     <select class="form-select" id="category_id" name="category_id">
@@ -32,6 +33,7 @@
                         @endforeach
                       </select>
                   </div>
+
                   <div class="mb-3">
                         <h3>Tag:</h3>
                         @foreach ($tags as $tag)
@@ -45,6 +47,7 @@
                             {{-- checkbox --}}
                         @endforeach
                     </div>
+
                 <div class="mb-3">
                     <label for="content" class="form-label">Title</label>
                     <textarea class="form-control" name="content" id="content" cols="30" rows="10">{{old('content')}}</textarea>

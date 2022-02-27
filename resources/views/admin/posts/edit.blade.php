@@ -32,16 +32,36 @@
                             <option selected value="{{ $category->id }}" {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
                         @endforeach
                       </select>
-                  </div>
+                </div>
+
+                <div class="mb-3">
+                    <h3>Tag:</h3>
+                    @foreach ($tags as $tag)
+                    {{-- Checkbox --}}
+                        <div class="form-check">
+                            
+                            {{-- Se ci sono errori nella validazione dell'edit assumo che l'utente abbia precedentemente caricato la pagina e quindi assegnerò il valore contenuto in old --}}
+                            @if ($errors->any())
+                            <input class="form-check-input" {{ in_array($tag->id,old('tags',[])) ? 'checked' : '' }} name="tags[]" type="checkbox" value="{{$tag->id}}" id="tag-{{$tag->id}}">
+                            @else
+                                {{-- altrimenti se non ci sono errori di validazione assumo che sia la prima volta che l'utente carica la pagina quindi: --}}
+                                <input class="form-check-input" {{ $post->tags->contains($tag) ? 'checked' : '' }} name="tags[]" type="checkbox" value="{{$tag->id}}" id="tag-{{$tag->id}}">
+                            @endif
+                            
+                            <label class="form-check-label" for="tag-{{$tag->id}}">
+                                {{ $tag->name }}
+                            </label>
+                        </div>
+                        {{-- checkbox --}}
+                    @endforeach
+                </div>  
 
                 <div class="mb-3">
                     <label for="content" class="form-label">Content</label>
                     <textarea class="form-control" name="content" id="content" cols="30" rows="10">{{ old('title', $post->content) }}</textarea>
-                  </div>
-                
-                
+                </div>
                 <button type="submit" class="btn btn-primary">Salva</button>
-              </form>
+            </form>
         </div>
     </section>
 @endsection
