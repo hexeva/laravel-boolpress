@@ -30,10 +30,11 @@
                         <a @click="getPosts(currentPage - 1)" class="page-link" href="#">Previous</a>
                     </li>
 
-                    <!-- Pages link
-                    <li >
-                        <a class="page-link" href="#"></a>
-                    </li> -->
+                    <!-- Pages link -->
+                    <li v-for="element in lastPage" :key="element" class="page-item" :class="{ 'active': currentPage == element }">
+                        <a @click="getPosts(element)" class="page-link" href="#">{{ element }}</a>
+                    </li>
+
 
                     <!-- Next link -->
                     <li class="page-item" :class="{'disabled' : currentPage == lastPage}" >
@@ -51,14 +52,14 @@ export default {
     data: function() {
         return {
             posts: [],
-            currentPage:1,
+            currentPage: 1,
             lastPage : false
             
         };
     },
     methods: {
         getPosts: function(pageNumber) {
-            // Faremo la chiamata API per prenderci i post
+            // Faremo la chiamata API per prenderci i post tra i params gli passo page (la prima pagina) che nel created lo considero di default come pagina 1
             axios.get('/api/posts',{
                 params:{
                     page:pageNumber

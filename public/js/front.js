@@ -1955,6 +1955,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Posts',
   data: function data() {
@@ -1968,7 +1969,7 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts(pageNumber) {
       var _this = this;
 
-      // Faremo la chiamata API per prenderci i post
+      // Faremo la chiamata API per prenderci i post tra i params gli passo page (la prima pagina) che nel created lo considero di default come pagina 1
       axios.get('/api/posts', {
         params: {
           page: pageNumber
@@ -2530,53 +2531,84 @@ var render = function () {
       ),
       _vm._v(" "),
       _c("nav", [
-        _c("ul", { staticClass: "pagination" }, [
-          _c(
-            "li",
-            {
-              staticClass: "page-item",
-              class: { disabled: _vm.currentPage == 1 },
-            },
-            [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function ($event) {
-                      return _vm.getPosts(_vm.currentPage - 1)
+        _c(
+          "ul",
+          { staticClass: "pagination" },
+          [
+            _c(
+              "li",
+              {
+                staticClass: "page-item",
+                class: { disabled: _vm.currentPage == 1 },
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.getPosts(_vm.currentPage - 1)
+                      },
                     },
                   },
-                },
-                [_vm._v("Previous")]
-              ),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            {
-              staticClass: "page-item",
-              class: { disabled: _vm.currentPage == _vm.lastPage },
-            },
-            [
-              _c(
-                "a",
+                  [_vm._v("Previous")]
+                ),
+              ]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.lastPage, function (element) {
+              return _c(
+                "li",
                 {
-                  staticClass: "page-link",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function ($event) {
-                      return _vm.getPosts(_vm.currentPage + 1)
+                  key: element,
+                  staticClass: "page-item",
+                  class: { active: _vm.currentPage == element },
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.getPosts(element)
+                        },
+                      },
+                    },
+                    [_vm._v(_vm._s(element))]
+                  ),
+                ]
+              )
+            }),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "page-item",
+                class: { disabled: _vm.currentPage == _vm.lastPage },
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.getPosts(_vm.currentPage + 1)
+                      },
                     },
                   },
-                },
-                [_vm._v("Next")]
-              ),
-            ]
-          ),
-        ]),
+                  [_vm._v("Next")]
+                ),
+              ]
+            ),
+          ],
+          2
+        ),
       ]),
     ]),
   ])
