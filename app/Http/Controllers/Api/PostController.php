@@ -17,6 +17,6 @@ class PostController extends Controller
         'results' => $posts
         ];
 
-        return response()->json([$response_array]);
+        return response()->json($response_array);
     }
 }

@@ -1916,29 +1916,72 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Posts',
-  // data
   data: function data() {
     return {
       posts: []
     };
   },
-  // end data
-  // methods
   methods: {
-    get_posts: function get_posts() {
+    getPosts: function getPosts() {
       var _this = this;
 
-      axios.get('/api/posts').then(function (response) {
-        console.log(response);
+      // Faremo la chiamata API per prenderci i post
+      axios.get('/api/posts', {}).then(function (response) {
         _this.posts = response.data.results;
       });
+    },
+    // funzione per tagliare la lunghezza del testo
+    contentLenght: function contentLenght(text, lengthText) {
+      if (text.length > lengthText) {
+        return text.substr(0, lengthText) + '...';
+      } else {
+        return text;
+      }
     }
   },
-  // end methods
   created: function created() {
-    this.get_posts();
+    this.getPosts();
   }
 });
 
@@ -2453,16 +2496,55 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("section", [
+    _c("div", { staticClass: "container" }, [
+      _c("h1", [_vm._v("Tutti i Posts")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "row row-cols-3" },
+        _vm._l(_vm.posts, function (post, index) {
+          return _c("div", { key: index, staticClass: "col" }, [
+            _c("div", { staticClass: "card my-3" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("h5", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(post.title)),
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-text" }, [
+                  _vm._v(_vm._s(_vm.contentLenght(post.content, 50))),
+                ]),
+              ]),
+            ]),
+          ])
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _vm._m(0),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", [
-      _c("div", { staticClass: "container" }, [
-        _vm._v("\n        Io sono Il component Posts\n    "),
+    return _c("nav", [
+      _c("ul", { staticClass: "pagination" }, [
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("Previous"),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("li", [_c("a", { staticClass: "page-link", attrs: { href: "#" } })]),
+        _vm._v(" "),
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("Next"),
+          ]),
+        ]),
       ]),
     ])
   },
