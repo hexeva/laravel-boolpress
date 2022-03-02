@@ -22,22 +22,22 @@
                 </div>
                 <!-- End Single post card -->
             </div>
-
+            <!-- SEZIONE PAGINATION -->
             <nav>
                 <ul class="pagination">
                     <!-- Previous link -->
-                    <li class="page-item" >
-                        <a class="page-link" href="#">Previous</a>
+                    <li  class="page-item" :class="{'disabled' : currentPage == 1}" >
+                        <a @click="getPosts(currentPage - 1)" class="page-link" href="#">Previous</a>
                     </li>
 
-                    <!-- Pages link -->
+                    <!-- Pages link
                     <li >
                         <a class="page-link" href="#"></a>
-                    </li>
+                    </li> -->
 
                     <!-- Next link -->
-                    <li class="page-item" >
-                        <a class="page-link" href="#">Next</a>
+                    <li class="page-item" :class="{'disabled' : currentPage == lastPage}" >
+                        <a @click="getPosts(currentPage + 1)" class="page-link" href="#">Next</a>
                     </li>
                 </ul>
             </nav>
@@ -51,17 +51,26 @@ export default {
     data: function() {
         return {
             posts: [],
+            currentPage:1,
+            lastPage : false
             
         };
     },
     methods: {
-        getPosts: function() {
+        getPosts: function(pageNumber) {
             // Faremo la chiamata API per prenderci i post
-            axios.get('/api/posts', {
+            axios.get('/api/posts',{
+                params:{
+                    page:pageNumber
+                }
+            }, {
                 
             })
             .then((response) => {
-                this.posts = response.data.results;
+                this.posts = response.data.results.data;
+                this.currentPage = response.data.results.current_page;
+                this.lastPage = response.data.results.last_page;
+
                 
             });
         },
@@ -76,7 +85,7 @@ export default {
         
     },
     created: function() {
-        this.getPosts();
+        this.getPosts(1);
     }
 }
 </script>
