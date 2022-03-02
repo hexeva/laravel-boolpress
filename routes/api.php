@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Rotta per API le rotte create in questo file hanno di default l'url base /api
+Route::get('/posts', 'Api\PostController@index');
