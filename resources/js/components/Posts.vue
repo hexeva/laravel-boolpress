@@ -31,6 +31,7 @@
                     </li>
 
                     <!-- Pages link -->
+                    <!-- stampo i numeri delle pagine per quante sono in lastpage -->
                     <li v-for="element in lastPage" :key="element" class="page-item" :class="{ 'active': currentPage == element }">
                         <a @click="getPosts(element)" class="page-link" href="#">{{ element }}</a>
                     </li>
@@ -59,7 +60,7 @@ export default {
     },
     methods: {
         getPosts: function(pageNumber) {
-            // Faremo la chiamata API per prenderci i post tra i params gli passo page (la prima pagina) che nel created lo considero di default come pagina 1
+            // Faremo la chiamata API per prenderci i post. Tra i params gli passo page (la prima pagina) che nel created lo considero di default come pagina 1
             axios.get('/api/posts',{
                 params:{
                     page:pageNumber
@@ -86,6 +87,7 @@ export default {
         
     },
     created: function() {
+        // nel created alla funzione getPosts gli passo anche come argomento la pagina 1 che è quella che voglio vedere di default al caricamento
         this.getPosts(1);
     }
 }
