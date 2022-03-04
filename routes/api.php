@@ -20,3 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Rotta per API le rotte create in questo file hanno di default l'url base /api
 Route::get('/posts', 'Api\PostController@index');
+
+// Rotta per Api del dettaglio del singolo Post
+Route::get('/posts/{slug}','Api\PostController@show');

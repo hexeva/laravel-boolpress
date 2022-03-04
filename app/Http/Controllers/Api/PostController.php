@@ -19,4 +19,24 @@ class PostController extends Controller
 
         return response()->json($response_array);
     }
+
+    // Funzione per richiamare il singolo post per slug
+
+    public function show($slug){
+        $post = Post::where('slug', '=' , $slug)->first();
+        // se torna i post con lo slug che richiedo allora...
+        if($post){
+        return response()->json([
+            'success'=> true,
+            'results'=> $post
+        ]);
+        // altrimenti response array vuoto
+        }else{
+            return response()->json([
+            'success'=> false,
+            'results'=> []
+            ]);
+        }
+
+    }
 }

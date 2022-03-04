@@ -15,9 +15,9 @@
                         <!-- <ul class="list-group list-group-flush">
                             <li class="list-group-item">An item</li>
                         </ul> -->
-                        <!-- <div class="card-body">
-                            <a href="#" class="card-link">Card link</a>
-                        </div> -->
+                        <div class="card-body">
+                            <router-link class="card-link" :to="{name:'post_details',params :{slug: post.slug}}">Vai ai dettagli</router-link>
+                        </div>
                     </div>
                 </div>
                 <!-- End Single post card -->
