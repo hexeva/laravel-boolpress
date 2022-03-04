@@ -3,7 +3,10 @@
         <div class="card my-5">
             <h5 class="card-header">Details</h5>
             <div class="card-body">
-                <h5 class="card-title">{{post.title}}</h5>
+                <h3 class="card-title">{{post.title}}</h3>
+                <div v-if="post.category">
+                    <h5 class="card-title"> Category: {{post.category.name}}</h5>
+                </div>
                 <p class="card-text">{{post.content}}</p>
                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
             </div>
@@ -45,3 +48,7 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+   
+</style>
