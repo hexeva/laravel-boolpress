@@ -7,6 +7,9 @@
                 <div v-if="post.category">
                     <h5 class="card-title"> Category: {{post.category.name}}</h5>
                 </div>
+                <div v-if="post.tags.length > 0">
+                    <span v-for="tag in post.tags" :key="tag.id" class="mx-2 badge my_badge  rounded-pill bg-info text-dark ">{{tag.name}}</span>
+                </div>
                 <p class="card-text">{{post.content}}</p>
                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
             </div>
@@ -50,5 +53,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-   
+    .my_badge{
+        font-size: 15px;
+        padding: 7px;
+    }
+  
 </style>
