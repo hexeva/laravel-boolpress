@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 import Home from './pages/Home.vue';
 import About from './pages/About.vue';
 import Blog from './pages/Blog.vue';
+import TagList from './pages/TagList.vue';
+
 import PostDetails from './pages/PostDetails.vue';
 
 import NotFound from './pages/NotFound.vue';
@@ -32,6 +34,11 @@ const router = new VueRouter({
             path: "/blog/:slug",
             name: "post_details",
             component: PostDetails
+        },
+        {
+            path: "/tags/:slug",
+            name: "tag_list",
+            component: TagList
         },
         // rotta per url sbagliato
         {
