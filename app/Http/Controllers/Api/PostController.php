@@ -23,7 +23,7 @@ class PostController extends Controller
     // Funzione per richiamare il singolo post per slug
 
     public function show($slug){
-        // con il metodo with posso prendermi anche le relazioni collegate a Post
+        // con il metodo with posso prendermi anche le relazioni collegate a Post 
         $post = Post::where('slug', '=' , $slug)->with(['category','tags'])->first();
         // se torna i post con lo slug che richiedo allora...
         if($post){

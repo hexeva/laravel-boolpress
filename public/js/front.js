@@ -2178,7 +2178,7 @@ __webpack_require__.r(__webpack_exports__);
   // data
   data: function data() {
     return {
-      post: false
+      post: {}
     };
   },
   // end data
@@ -3781,7 +3781,7 @@ var render = function () {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _vm.post.tags.length > 0
+        _vm.post.tags && _vm.post.tags.length > 0
           ? _c(
               "div",
               _vm._l(_vm.post.tags, function (tag) {

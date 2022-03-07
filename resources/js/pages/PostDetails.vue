@@ -7,7 +7,7 @@
                 <div v-if="post.category">
                     <h5 class="card-title"> Category: {{post.category.name}}</h5>
                 </div>
-                <div v-if="post.tags.length > 0">
+                <div v-if="post.tags && post.tags.length > 0">
                     <span v-for="tag in post.tags" :key="tag.id" class="mx-2 badge my_badge  rounded-pill bg-info text-dark ">{{tag.name}}</span>
                 </div>
                 <p class="card-text">{{post.content}}</p>
@@ -23,7 +23,7 @@ export default {
     // data
     data:function(){
         return {
-            post: false,
+            post: {},
 
         }
     },
