@@ -136,6 +136,16 @@ class PostController extends Controller
         if($form_data['title'] != $post->title) {
             $form_data['slug'] = $this->getUniqueSlugFromTitle($form_data['title']);
         }
+
+        // PATH IMMAGINI se esiste la chiave form_data image 
+        if($form_data['image']){
+            // 1- rimuovo la vecchia immagine 
+            Storage::delete($post->cover);
+            // 2 - eseguo l'upload del nuovo file
+            $img_path = Storage::put('post_covers',$form_data['image']);
+            // 3 - salvo nella colonna cover della tabella il nuovo path dell'immagine
+            $form_data['cover'] = $img_path;
+        }
         
         $post->update($form_data);
         // sincronizzo la collection post->tags con i dati passati dal form. In questo caso i tags
@@ -162,6 +172,10 @@ class PostController extends Controller
         $post = Post::FindOrFail($id);
         // prima di cancellare devo eliminare tutte le relazioni tra tabelle
         $post->tags()->sync([]);
+        // cancello anche i file di storage se ci sono
+        if($post->cover){
+            Storage::delete($post->cover);
+        }
         $post->delete();
         return redirect()->route('admin.posts.index');
     }
