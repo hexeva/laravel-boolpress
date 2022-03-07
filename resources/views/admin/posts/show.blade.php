@@ -7,10 +7,19 @@
     <div class="my-3">
         <strong>Slug:</strong> {{$post->slug}}
     </div>
+    
     {{-- verifico se la relazione con la categoria non è NUll faccio vedere la category altrimenti torno un messaggio 'nessuna categoria' --}}
     <div class="my-3">
         <h3>Category: {{$post->category ? $post->category->name : 'nessuna categoria'}}</h3>
     </div> 
+
+    {{-- immagine --}}
+    @if ($post->cover)
+    <div>
+        <img src="{{ asset('storage/' . $post->cover )}}" alt="{{$post->title}}">
+    </div>
+    @endif
+    {{-- immagine --}}
 
     <div class="my-3"><strong>Tags:</strong>
         @forelse ($post->tags as $tag)
