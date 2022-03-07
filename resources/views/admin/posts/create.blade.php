@@ -47,13 +47,16 @@
                     </div>
 
                     {{-- Upload images --}}
-
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
                         <input type="file" id="image" name="image">
                     </div>
-
                       {{-- end upload images --}}
+                      {{-- error --}}
+                    @error('image')
+                        <div class="alert alert-danger">{{$message}}</div>
+                    @enderror
+                    {{-- end error --}}
 
                 <div class="mb-3">
                     <label for="content" class="form-label">Content</label>

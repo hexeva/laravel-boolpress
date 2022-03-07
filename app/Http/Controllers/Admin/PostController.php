@@ -175,7 +175,9 @@ class PostController extends Controller
             // validazione per relazione tra category e posts con exists specifico che category_id esiste dentro category e corrisponde all'id
             'category_id'=>'exists:categories,id|nullable',
             // valido anche tags 
-            'tags'=>'exists:tags,id'
+            'tags'=>'exists:tags,id',
+            // valido anche le immagini con image (specifica che i file devono essere jpeg,svg,png...)
+            'image'=>'image|max:800'
         ];
     }
 
