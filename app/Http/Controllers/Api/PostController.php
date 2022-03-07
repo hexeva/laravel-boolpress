@@ -36,6 +36,12 @@ class PostController extends Controller
     public function show($slug){
         // con il metodo with posso prendermi anche le relazioni collegate a Post 
         $post = Post::where('slug', '=' , $slug)->with(['category','tags'])->first();
+
+        // PATH IMAGINI solo se post->cover non è null
+         if($post->cover) {
+            $post->cover = url('storage/' . $post->cover);
+        }
+
         // se torna i post con lo slug che richiedo allora...
         if($post){
         return response()->json([

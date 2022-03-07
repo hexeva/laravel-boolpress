@@ -4,12 +4,16 @@
             <h5 class="card-header">Details</h5>
             <div class="card-body">
                 <h3 class="card-title">{{post.title}}</h3>
+
                 <div v-if="post.category">
                     <h5 class="card-title"> Category: {{post.category.name}}</h5>
                 </div>
                 <div v-if="post.tags && post.tags.length > 0">
                     <span v-for="tag in post.tags" :key="tag.id" class="mx-2 badge my_badge  rounded-pill bg-info text-dark ">{{tag.name}}</span>
                 </div>
+
+                <img v-if="post.cover" :src="post.cover" class="card-img-top" :alt="post.title">
+
                 <p class="card-text">{{post.content}}</p>
                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
             </div>
@@ -56,6 +60,10 @@ export default {
     .my_badge{
         font-size: 15px;
         padding: 7px;
+    }
+    img{
+        max-width: 100%;
+        width: 500px;
     }
   
 </style>

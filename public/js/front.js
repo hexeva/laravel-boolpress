@@ -2173,6 +2173,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostDetails',
   // data
@@ -2299,7 +2303,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".my_badge[data-v-af2a14ee] {\n  font-size: 15px;\n  padding: 7px;\n}", ""]);
+exports.push([module.i, ".my_badge[data-v-af2a14ee] {\n  font-size: 15px;\n  padding: 7px;\n}\nimg[data-v-af2a14ee] {\n  max-width: 100%;\n  width: 500px;\n}", ""]);
 
 // exports
 
@@ -3510,6 +3514,13 @@ var render = function () {
         _vm._l(_vm.posts, function (post, index) {
           return _c("div", { key: index, staticClass: "col" }, [
             _c("div", { staticClass: "card my-3" }, [
+              post.cover
+                ? _c("img", {
+                    staticClass: "card-img-top",
+                    attrs: { src: post.cover, alt: post.title },
+                  })
+                : _vm._e(),
+              _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
                 _c("h5", { staticClass: "card-title" }, [
                   _vm._v(_vm._s(post.title)),
@@ -3797,6 +3808,13 @@ var render = function () {
               }),
               0
             )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.post.cover
+          ? _c("img", {
+              staticClass: "card-img-top",
+              attrs: { src: _vm.post.cover, alt: _vm.post.title },
+            })
           : _vm._e(),
         _vm._v(" "),
         _c("p", { staticClass: "card-text" }, [
