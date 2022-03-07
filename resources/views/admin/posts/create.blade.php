@@ -4,7 +4,7 @@
     <section>
         <h1 class="text-center">CREATE A NEW POST</h1>
         <div>
-            <form action="{{route('admin.posts.store')}}" method="post">
+            <form action="{{route('admin.posts.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 <div class="mb-3">
@@ -45,6 +45,15 @@
                         {{-- checkbox --}}
                         @endforeach
                     </div>
+
+                    {{-- Upload images --}}
+
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" id="image" name="image">
+                    </div>
+
+                      {{-- end upload images --}}
 
                 <div class="mb-3">
                     <label for="content" class="form-label">Content</label>

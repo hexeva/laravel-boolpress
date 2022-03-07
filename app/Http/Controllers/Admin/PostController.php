@@ -9,6 +9,8 @@ use App\Category;
 use App\Tag;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Exists;
+// includo la classe per l'upload delle immagini
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -58,7 +60,17 @@ class PostController extends Controller
         $new_post = new Post();
         $new_post->fill($form_data);
         $new_post->slug = $this->getUniqueSlugFromTitle($form_data['title']);
+
+        // GESTISCO IMMAGINI DEL POST (solo se esiste la chiave image in form_data altrimenti la chiave non esisterà proprio e avrà errore)
+        if(isset($form_data['image'])){
+            // 1 - MEttere immagine caricata nella cartella storage ($img_path sarà una stringa ritornata dal metodo put che contiene il path dell'immagine)
+            $img_path = Storage::put('post_covers',$form_data['image']);
+            // 2- Salvo nella colonna del database il path dell'immagine
+            $new_post->cover = $img_path;
+        }
+        
         $new_post->save();
+
         // creo il record della tabella ponte per relazione tra post e tags e verifico che effettivamente form_data['tags] esista
         if(array_key_exists("tags",$form_data)){
         $new_post->tags()->sync($form_data['tags']);
