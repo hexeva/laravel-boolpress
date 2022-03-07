@@ -12,6 +12,17 @@ class PostController extends Controller
         $posts = Post::paginate(9);
         // dd($posts);
 
+        // PATH IMMAGINI per ogni post modifichiamo l'attributo 'cover' trasformandolo in un path assoluto con il metodo url()
+        // dd($posts[0]->cover);
+        foreach($posts as $post){
+            // questa operazione la facciamo solo se post->cover non è null
+            if($post->cover){
+                $post->cover = url('storage/' . $post->cover);
+            }
+        }
+        // dd($post->cover);
+            
+
         $response_array = [
         'success' => true,
         'results' => $posts

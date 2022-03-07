@@ -140,7 +140,9 @@ class PostController extends Controller
         // PATH IMMAGINI se esiste la chiave form_data image 
         if($form_data['image']){
             // 1- rimuovo la vecchia immagine 
-            Storage::delete($post->cover);
+            if($post->cover){
+                Storage::delete($post->cover);
+            }
             // 2 - eseguo l'upload del nuovo file
             $img_path = Storage::put('post_covers',$form_data['image']);
             // 3 - salvo nella colonna cover della tabella il nuovo path dell'immagine
