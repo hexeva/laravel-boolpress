@@ -26,3 +26,6 @@ Route::get('/posts/{slug}','Api\PostController@show');
 
 // Rotta per endpoint Tags
 Route::get('/tags/{slug}','Api\TagController@show');
+
+// Rotta per Api LEads
+Route::post('/leads/store', 'Api\LeadController@store');
