@@ -79,7 +79,8 @@ class PostController extends Controller
         $new_post->tags()->sync($form_data['tags']);
         }
     
-        // STRINGA PER L'INVIO DELLA MAIL ALL'ADMIN per notifica di un nuovo post inserito
+        // STRINGA PER L'INVIO DELLA MAIL ALL'ADMIN per notifica di un nuovo post inserito.
+        //  al Model NewPostAdminNotification passo come argomento tutto il post
         Mail::to('editor@boolpress.it')->send(new NewPostAdminNotification($new_post));
 
         return redirect()->route('admin.posts.show',['post'=>$new_post->id]);
