@@ -11,6 +11,9 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Exists;
 // includo la classe per l'upload delle immagini
 use Illuminate\Support\Facades\Storage;
+// includo la facades per le MAIL e l'oggetto Mail
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewPostAdminNotification;
 
 class PostController extends Controller
 {
@@ -75,9 +78,13 @@ class PostController extends Controller
         if(array_key_exists("tags",$form_data)){
         $new_post->tags()->sync($form_data['tags']);
         }
-        
+    
+        // STRINGA PER L'INVIO DELLA MAIL ALL'ADMIN per notifica di un nuovo post inserito
+        Mail::to('editor@boolpress.it')->send(new NewPostAdminNotification($new_post));
 
         return redirect()->route('admin.posts.show',['post'=>$new_post->id]);
+
+
     }
 
     /**
