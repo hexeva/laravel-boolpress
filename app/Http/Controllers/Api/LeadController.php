@@ -19,7 +19,10 @@ class LeadController extends Controller
         // 1 - salvo il nuovo Lead nel database
         $data = $request->all();
         // dd($data);
-        
+        $new_lead = new Lead();
+        $new_lead->fill($data);
+        $new_lead->save();
+
         // api Validation
         $validator = Validator::make($data, [
             'name' => 'required|max:255',
@@ -35,9 +38,7 @@ class LeadController extends Controller
             ]);
         }
 
-        $new_lead = new Lead();
-        $new_lead->fill($data);
-        $new_lead->save();
+        
 
         // 2- inviare la mail al customer service
         Mail::to('customer-service@boolpress.it')->send(new NewContactMail($new_lead));

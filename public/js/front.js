@@ -2161,17 +2161,18 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/leads/store', {
+        // con il metodo post NON dobbiamo passare i dati con params 
         email: this.email,
         name: this.name,
         message: this.message
       }).then(function (response) {
         if (response.data.success) {
-          // Tutto ok
+          // Se Tutto ok
           _this.name = '';
           _this.email = '';
           _this.message = '';
           _this.success = true;
-          _this.error = {};
+          _this.errors = {};
         } else {
           // Ci sono errori di validazione
           _this.success = false;
@@ -3925,7 +3926,7 @@ var render = function () {
           on: {
             click: function ($event) {
               $event.preventDefault()
-              return _vm.sendMessages()
+              return _vm.sendMessage()
             },
           },
         },

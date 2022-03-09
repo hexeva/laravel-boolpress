@@ -29,7 +29,7 @@
             </div>
             <!-- end error -->
             <!-- click.prevent lo utilizzo per evitare di refreshare la pagina -->
-            <button @click.prevent="sendMessages()" type="submit" class="btn btn-primary">Submit</button>
+            <button @click.prevent="sendMessage()" type="submit" class="btn btn-primary">Submit</button>
         </form>
 
     </div>
@@ -52,18 +52,19 @@ export default {
     methods:{
         sendMessage: function() {
             axios.post('/api/leads/store', {
+                // con il metodo post NON dobbiamo passare i dati con params 
                 email: this.email,
                 name: this.name,
                 message: this.message
             })
             .then((response) => {
                 if(response.data.success) {
-                    // Tutto ok
+                    // Se Tutto ok
                     this.name = '';
                     this.email = '';
                     this.message = '';
                     this.success = true;
-                    this.error = {};
+                    this.errors = {};
                 } else {
                     // Ci sono errori di validazione
                     this.success = false;
