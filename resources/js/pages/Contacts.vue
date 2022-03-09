@@ -58,6 +58,7 @@ export default {
                 message: this.message
             })
             .then((response) => {
+                console.log(response);
                 if(response.data.success) {
                     // Se Tutto ok
                     this.name = '';
@@ -68,7 +69,7 @@ export default {
                 } else {
                     // Ci sono errori di validazione
                     this.success = false;
-                    this.errors = response.data.errors
+                    this.errors = response.data.errors;
                 }
             });
         }

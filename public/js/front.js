@@ -2166,6 +2166,8 @@ __webpack_require__.r(__webpack_exports__);
         name: this.name,
         message: this.message
       }).then(function (response) {
+        console.log(response);
+
         if (response.data.success) {
           // Se Tutto ok
           _this.name = '';

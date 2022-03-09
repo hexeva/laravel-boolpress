@@ -16,12 +16,9 @@ use Illuminate\Support\Facades\Validator;
 class LeadController extends Controller
 {
     public function store(Request $request){
-        // 1 - salvo il nuovo Lead nel database
         $data = $request->all();
         // dd($data);
-        $new_lead = new Lead();
-        $new_lead->fill($data);
-        $new_lead->save();
+        
 
         // api Validation
         $validator = Validator::make($data, [
@@ -37,6 +34,17 @@ class LeadController extends Controller
                 'errors' => $validator->errors()
             ]);
         }
+        // 1 - salvo il nuovo Lead nel database
+
+        $new_lead = new Lead();
+        $new_lead->fill($data);
+        $new_lead->save();
+
+        return response()->json([
+            'success' => true,
+            
+        ]);
+  
 
         
 
